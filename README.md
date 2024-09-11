@@ -1,3 +1,5 @@
+## Forked for the VERTEXSO project in September 2024
+
 [![Build Status](https://github.com/MITgcm/MITgcm/workflows/build/badge.svg)](https://github.com/MITgcm/MITgcm/actions)
 [![Documentation Status](http://readthedocs.org/projects/mitgcm/badge/?version=latest)](http://mitgcm.readthedocs.io/en/latest/?badge=latest)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1409237.svg)](https://doi.org/10.5281/zenodo.1409237)

@@ -24,6 +24,7 @@ core
 *.meta
 *.data
 *RUN_*
+*.png
 
 /doc/_build/
 

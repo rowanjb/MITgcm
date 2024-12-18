@@ -23,7 +23,7 @@ core
 .DS_store
 *.meta
 *.data
-*RUN_*
+*run_*
 *.png
 *.err
 *.out

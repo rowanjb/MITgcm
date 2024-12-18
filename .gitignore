@@ -21,6 +21,9 @@ core
 *.pyc
 # OSX system files
 .DS_store
+*.meta
+*.data
+*RUN_*
 
 /doc/_build/
 

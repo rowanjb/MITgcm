@@ -25,6 +25,9 @@ core
 *.data
 *RUN_*
 *.png
+*.err
+*.out
+*.pdf
 
 /doc/_build/
 

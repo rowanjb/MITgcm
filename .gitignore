@@ -28,6 +28,9 @@ core
 *.err
 *.out
 *.pdf
+*STDERR*
+*STDOUT*
+*scratch1.00*
 
 /doc/_build/
 

@@ -26,7 +26,7 @@
  eosType='LINEAR',
  nonHydrostatic=.TRUE.,
  saltStepping=.FALSE.,
- useSingleCpuIO=.TRUE.,
+# useSingleCpuIO=.TRUE.,
  &
 
 # Elliptic solver parameters
@@ -41,7 +41,8 @@
  &PARM03
  nIter0=0,
 #endTime=43200.,
- nTimeSteps=8640,
+ nTimeSteps=3,
+#8640,
  deltaT=10.,
  abEps=0.1,
  pChkptFreq=43200.,

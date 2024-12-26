@@ -1,13 +1,13 @@
 # Multithreaded + multi-processing makefile for:
-#    Linux cm4login1 6.4.0-150600.23.25-default #1 SMP PREEMPT_DYNAMIC Tue Oct  1 10:54:01 UTC 2024 (ea7c56d) x86_64 x86_64 x86_64 GNU/Linux
+#    Linux albedo0 4.18.0-372.13.1.el8_6.x86_64 #1 SMP Wed Jun 29 17:21:09 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
 # This makefile was generated automatically on
-#    Mon 23 Dec 2024 05:12:22 PM CET
+#    Thu Dec 26 11:43:54 CET 2024
 # by the command:
-#    ../../tools/genmake2 -mods ../code -optfile ../../tools/build_options/linux_amd64_ifort_coolMuc2
+#    ../../tools/genmake2 -mods ../code -optfile ../../tools/build_options/linux_amd64_ifort_albedo
 # executed by:
-#    ra85duq@cm4login1:/dss/dsshome1/0B/ra85duq/MITgcm/so_plumes/build
+#    robrow001@albedo0:/albedo/home/robrow001/MITgcm/so_plumes/build
 #
-# OPTFILE="../../tools/build_options/linux_amd64_ifort_coolMuc2"
+# OPTFILE="../../tools/build_options/linux_amd64_ifort_albedo"
 #
 # BUILDDIR     : Directory where object files are written
 # SOURCEDIRS   : Directories containing the source (.F) files
@@ -59,29 +59,29 @@ F90C = ifort
 # C compiler
 CC = icc
 # Link editor
-LINK = ifort -shared-intel 
+LINK = ifort 
 
 # Defines for CPP
 DEFINES = -DWORDLENGTH=4 -DHAVE_SYSTEM -DHAVE_FDATE -DHAVE_ETIME_FCT -DHAVE_CLOC -DHAVE_SETRLSTK -DHAVE_SIGREG -DHAVE_STAT -DHAVE_FLUSH 
 # Includes for CPP
 INCLUDES = 
 # default CPP includes for makedepend
-CPPINCLUDES =  -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-toolkit/2023.2.0/intel-oneapi-dpct/2023.2.0-gcc-vx3f74b/dpcpp-ct/2023.2.0/include -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-toolkit/2023.2.0/intel-oneapi-dpl/2022.2.0-gcc-zd4rpn6/dpl/2022.2.0/linux/include -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-toolkit/2023.2.0/intel-oneapi-ippcp/2021.8.0-gcc-jvuw4zr/ippcp/2021.8.0/include -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-toolkit/2023.2.0/intel-oneapi-dal/2023.2.0-gcc-tgjtmju/dal/2023.2.0/include -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-toolkit/2023.2.0/intel-oneapi-ipp/2021.9.0-gcc-3gq62k2/ipp/2021.9.0/include -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-toolkit/2023.2.0/intel-oneapi-tbb/2021.10.0-gcc-yrdt2fb/tbb/2021.10.0/env/../include -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-toolkit/2023.2.0/intel-oneapi-dnn/2023.2.0-gcc-6vso2bt/dnnl/2023.2.0/cpu_dpcpp_gpu_dpcpp/include -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-toolkit/2023.2.0/intel-oneapi-ccl/2021.10.0-gcc-ufmwrul/ccl/2021.10.0/include/cpu_gpu_dpcpp -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-toolkit/2023.2.0/intel-oneapi-dpcpp-ct/2023.2.0-gcc-kdywdyv/dpcpp-ct/2023.2.0/include -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-oneapi-mkl/2023.2.0-gcc-etrpstd/mkl/2023.2.0/include -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-oneapi-mpi/2021.11-gcc-7rjqrjh/mpi/2021.11/include -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-oneapi-compilers/2023.2.1-gcc-gdpyukz/tbb/2021.10.0/env/../include -I/dss/lrzsys/sys/spack/release/23.1.0/opt/x86_64/intel-oneapi-compilers/2023.2.1-gcc-gdpyukz/compiler/2023.2.1/linux/lib/oclfpga/include -I/usr/lib64/gcc/x86_64-suse-linux/7/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-suse-linux/7/include-fixed -I/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include -I/usr/include
+CPPINCLUDES =  -I/albedo/soft/sw/spack-sw/intel-oneapi-mpi/2021.6.0-ypwmdz5/mpi/2021.6.0//include -I/usr/lib/gcc/x86_64-redhat-linux/8/include -I/usr/local/include -I/usr/include
 # Flags for KPP
 KFLAGS1 = 
 KFLAGS2 = 
 # Optim./debug for FC
-FFLAGS =  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium
-FOPTIM = -O2 -align -ip -fp-model source -xHost 
+FFLAGS =  -W0 -WB -convert big_endian -assume byterecl -fPIC
+FOPTIM = -ip -align -O3 -no-prec-div -fp-model fast=2 -march=core-avx2 -mtune=core-avx2 -qopt-prefetch=5 -unroll-aggressive 
 # Optim./debug for FC
-F90FLAGS =  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium
-F90OPTIM = -O2 -align -ip -fp-model source -xHost
+F90FLAGS =  -W0 -WB -convert big_endian -assume byterecl -fPIC
+F90OPTIM = -ip -align -O3 -no-prec-div -fp-model fast=2 -march=core-avx2 -mtune=core-avx2 -qopt-prefetch=5 -unroll-aggressive
 F90FIXEDFORMAT = -fixed -Tf
 # Flags for CC
-CFLAGS = -O0 -ip -m64 -xHost -mcmodel=medium
+CFLAGS = -O0 -fPIC -ip
 # Files that should not be optimized
-NOOPTFILES = 
-NOOPTFLAGS = -O0 -g
+NOOPTFILES = obcs_init_fixed.F obcs_set_connect.F
+NOOPTFLAGS = -ip -align -O1 -no-prec-div -fp-model fast=2 -march=core-avx2
 # Flags and libraries needed for linking
 LIBS = 
 # Name of the makefile
@@ -1298,7 +1298,7 @@ CLEAN:
 	-rm -f oad_cp.[0-9][0-9][0-9].?????
 
 makefile:
-	$(TOOLSDIR)/genmake2  "-mods" "../code" "-optfile" "../../tools/build_options/linux_amd64_ifort_coolMuc2"
+	$(TOOLSDIR)/genmake2  "-mods" "../code" "-optfile" "../../tools/build_options/linux_amd64_ifort_albedo"
 cleanlinks:
 	-find . -type l -exec rm {} \;
 
@@ -1316,9 +1316,9 @@ FC_NAMEMANGLE.h:
 BUILD_INFO.h:
 	@echo Creating $@ ...
 	-echo "#define THISVER 'checkpoint69a'" > $@
-	-echo "#define THISUSER 'ra85duq'" >> $@
-	-echo "#define THISDATE 'Mon 23 Dec 2024 05:12:22 PM CET'" >> $@
-	-echo "#define THISHOST 'cm4login1'" >> $@
+	-echo "#define THISUSER 'robrow001'" >> $@
+	-echo "#define THISDATE 'Thu Dec 26 11:43:54 CET 2024'" >> $@
+	-echo "#define THISHOST 'albedo0'" >> $@
 
 # The normal chain of rules is (  .F - .f - .o  )
 
@@ -1326,7 +1326,7 @@ BUILD_INFO.h:
 ## %.o : %.F
 
 # C preprocessing and replacing the _d in constants:
-CPPCMD = cat $< |  /usr/bin/cpp -traditional -P $(DEFINES) $(INCLUDES) | $(TOOLSDIR)/set64bitConst.sh
+CPPCMD = cat $< |  cpp -traditional -P $(DEFINES) $(INCLUDES) | $(TOOLSDIR)/set64bitConst.sh
 
 .F.f:
 	$(CPPCMD)  > $@
@@ -1714,6 +1714,10 @@ svd_touch:
 	cmp ad_config.template AD_CONFIG.h || cat ad_config.template > AD_CONFIG.h
 	@-rm -f ad_config.template
 
+obcs_init_fixed.o: obcs_init_fixed.f
+	$(FC) $(FFLAGS) $(NOOPTFLAGS) -c $<
+obcs_set_connect.o: obcs_set_connect.f
+	$(FC) $(FFLAGS) $(NOOPTFLAGS) -c $<
 # This section creates symbolic links
 
 

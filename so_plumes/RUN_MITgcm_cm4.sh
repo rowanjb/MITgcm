@@ -5,28 +5,41 @@
 ##          Copied 27 Feb 2023 by rowan2@ualberta.ca                  ##
 ##     Copied again onto an LRZ sytem on September 12 2024            ##
 ##^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^##
-#SBATCH -J Deep_Conv 
-#SBATCH --ntasks=4
+#SBATCH -J Deep_Conv#_MPI_test 
+#SBATCH --ntasks=1#####4
+####SBATCH --nodes=1
+####SBATCH --ntasks-per-node=69
 #SBATCH -D ./
-#SBATCH --get-user-env
-#SBATCH --clusters=cm2
-#SBATCH --partition=cm2_std
+##SBATCH --get-user-env
+###SBATCH --clusters=cm4
+#SBATCH --clusters=serial
+#SBATCH --partition=serial_std
 #####SBATCH --qos=cm2_std
-#SBATCH --mem=12000mb
+#SBATCH --mem=1000mb
 #SBATCH --export=NONE
-#SBATCH -t 0-2:00 
+#SBATCH -t 0-00:20:00 
 #SBATCH -o slurm-mem-%j.out
 #SBATCH -e slurm-mem-%j.err
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=rowan.brown@lmu.de
 
+module purge
+
 module load slurm_setup
 ###module load python/3.8.11-base
 ###source ~/.conda_init ##from https://doku.lrz.de/faq-conda-and-python-virtual-environment-on-lrz-hpc-clusters-41616204.html
 
-module load spack/22.2.1   intel-oneapi-compilers/2021.4.0   intel-mkl/2020   intel-mpi/2019-intel  
+#module load admin/2.0 tempdir/1.0 lrz/1.0 spack/22.2.1  intel-oneapi-compilers/2022.2.0   intel-mkl/2020   intel-mpi/2019-intel 
+module load spack gcc intel intel-mpi intel-mkl intel-toolkit
 
-mpiexec -n $SLURM_NTASKS ./run/mitgcmuv
+#module load intel-oneapi-vtune/2021.7.1
+#export MPS_STAT_LEVEL=4
+
+./run/mitgcmuv
+#mpiexec -n $SLURM_NTASKS ./run/mitgcmuv
+#mpiexec -n $SLURM_NTASKS aps --result-dir=./vtune ./run/mitgcmuv
+
+#aps-report -x --format=html ./vtune
 
 ##module load StdEnv/2020 gcc/9.3.0
 ##module load gdal/3.5.1

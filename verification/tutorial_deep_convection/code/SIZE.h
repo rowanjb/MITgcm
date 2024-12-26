@@ -45,11 +45,11 @@ CEOP
      &           sNx =  50,
      &           sNy =  50,
      &           OLx =   2,
-     &           OLy =   2,
-     &           nSx =   2,
-     &           nSy =   2,
-     &           nPx =   1,
-     &           nPy =   1,
+     &           OLy =   2, ! For MPI runs w/ 4 processors and 1 tile per process...
+     &           nSx =   1, ! set to 1
+     &           nSy =   1, ! set to 1
+     &           nPx =   2, ! set to 2
+     &           nPy =   2, ! set to 2
      &           Nx  = sNx*nSx*nPx,
      &           Ny  = sNy*nSy*nPy,
      &           Nr  =  50)

@@ -1,0 +1,15 @@
+Get compiler version using: ifort --version
+/dss/dsshome1/lrz/sys/spack/release/22.2.1/opt/x86_64/intel-oneapi-compilers/2022.2.0-gcc-3h32hs7/compiler/2022.2.0/linux/bin/intel64/ifort
+ifort (IFORT) 2021.7.0 20220726
+Copyright (C) 1985-2022 Intel Corporation.  All rights reserved.
+
+<-- compiler version ----
+
+running: check_fortran_compiler
+ ifort -W0 -WB -convert big_endian -assume byterecl -fPIC -ip -align -O3 -no-prec-div -fp-model fast=2 -march=core-avx2 -mtune=core-avx2 -qopt-prefetch=5 -unroll-aggressive -c genmake_tcomp.f
+ ifort -W0 -WB -convert big_endian -assume byterecl -fPIC -ip -align -O3 -no-prec-div -fp-model fast=2 -march=core-avx2 -mtune=core-avx2 -qopt-prefetch=5 -unroll-aggressive -o genmake_tcomp genmake_tcomp.o -L/dss/dsshome1/lrz/sys/spack/release/22.2.1/opt/haswell/netcdf-fortran/4.4.5-intel-2l27hls/lib -lnetcdff
+ ./genmake_tcomp
+ hello world :            1
+ hello world :            2
+ hello world :            3
+ --> set FC_CHECK= 5 /5

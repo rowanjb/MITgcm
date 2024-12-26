@@ -1,0 +1,119 @@
+Get compiler version using: ifort --version
+/dss/dsshome1/lrz/sys/spack/release/22.2.1/opt/x86_64/intel-oneapi-compilers/2021.4.0-gcc-xrzccgg/compiler/2021.4.0/linux/bin/intel64/ifort
+ifort (IFORT) 2021.4.0 20210910
+Copyright (C) 1985-2021 Intel Corporation.  All rights reserved.
+
+<-- compiler version ----
+
+running: check_fortran_compiler
+ ifort -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -O2 -align -ip -fp-model source -xHost -c genmake_tcomp.f
+ ifort -shared-intel -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -O2 -align -ip -fp-model source -xHost -o genmake_tcomp genmake_tcomp.o -L/dss/dsshome1/lrz/sys/spack/release/22.2.1/opt/haswell/netcdf-c/4.7.4-intel-puhckdv/lib -lnetcdf -lhdf5_hl -lhdf5 -lm -lz
+/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/ld: cannot find -lhdf5_hl
+/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/ld: cannot find -lhdf5
+
+ Warning: FORTRAN compiler test fails to link
+ --> set FC_CHECK= 1 /5
+
+running: look_for_makedepend()
+ --> set MAKEDEPEND=$(TOOLSDIR)/xmakedepend
+
+running: check_HAVE_CLOC()
+ running: get_fortran_c_namemangling()
+ icc -O0 -ip -m64 -xHost -mcmodel=medium -c genmake_test.c
+genmake_test.c(1): warning #266: function "tsub" declared implicitly
+  void tcall( char * string ) { tsub( string ); }
+                                ^
+
+ ifort -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -c genmake_tcomp.f
+ --> set FC_NAMEMANGLE='#define FC_NAMEMANGLE(X)  X ## _'
+icc -O0 -ip -m64 -xHost -mcmodel=medium -c genmake_tc_1.c
+ifort -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -o genmake_tc genmake_tc_2.f genmake_tc_1.o
+  HELLO WORLD   1728985238.87722     
+ --> set HAVE_CLOC='t'
+
+running: check_HAVE_SETRLSTK()
+icc -O0 -ip -m64 -xHost -mcmodel=medium -c genmake_tc_1.c
+      program hello
+      external setrlstk
+      call setrlstk()
+      end
+ifort -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -o genmake_tc genmake_tc_2.f genmake_tc_1.o
+ --> set HAVE_SETRLSTK=''
+
+running: check_HAVE_SIGREG()
+icc -O0 -ip -m64 -xHost -mcmodel=medium -c genmake_tc_1.c
+genmake_tc_1.c(11): warning #274: declaration is not visible outside of function
+      unsigned int sn, siginfo_t  si, struct ucontext *sc )
+                                             ^
+
+      program hello
+      integer anint
+      common /iv/ anint
+      external sigreg
+      call sigreg(anint)
+      end
+ifort -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -o genmake_tc genmake_tc_2.f genmake_tc_1.o
+ --> set HAVE_SIGREG='t'
+
+running: check_HAVE_STAT()
+icc -O0 -ip -m64 -xHost -mcmodel=medium -c genmake_tc_1.c
+      program hello
+      integer nbyte
+      call tfsize(nbyte)
+      print *," HELLO WORLD", nbyte
+      end
+ifort -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -o genmake_tc genmake_tc_2.f genmake_tc_1.o
+ --> set HAVE_STAT='t'
+
+running: check_netcdf_libs()
+===  genmake_tnc.F  >>>
+      program fgennc
+#include "netcdf.inc"
+      integer iret, ncid, xid
+      iret = nf_create('genmake_tnc.nc', NF_CLOBBER, ncid)
+      IF (iret .NE. NF_NOERR) write(*,*) NF_STRERROR(iret)
+      iret = nf_def_dim(ncid, 'X', 11, xid)
+      IF (iret .NE. NF_NOERR) write(*,*) NF_STRERROR(iret)
+      iret = nf_close(ncid)
+      IF (iret .NE. NF_NOERR) write(*,*) NF_STRERROR(iret)
+      end
+<<<  genmake_tnc.F  ===
+cat genmake_tnc.F |  /usr/bin/cpp -traditional -P -DWORDLENGTH=4 -DHAVE_SYSTEM -DHAVE_FDATE -DHAVE_ETIME_FCT -DHAVE_CLOC -DHAVE_SIGREG -DHAVE_STAT -I/dss/dsshome1/lrz/sys/spack/release/22.2.1/opt/haswell/netcdf-c/4.7.4-intel-puhckdv/include
+  WARNING: CPP failed to pre-process the netcdf test.
+    Please check that $INCLUDES is properly set.
+ifort  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -O2 -align -ip -fp-model source -xHost -c genmake_tnc.f  \ 
+  &&  ifort -shared-intel  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -O2 -align -ip -fp-model source -xHost -o genmake_tnc genmake_tnc.o -L/dss/dsshome1/lrz/sys/spack/release/22.2.1/opt/haswell/netcdf-c/4.7.4-intel-puhckdv/lib -lnetcdf -lhdf5_hl -lhdf5 -lm -lz
+genmake_tnc.f(14): error #5082: Syntax error, found END-OF-FILE when expecting one of: <LABEL> <END-OF-STATEMENT> ; <IDENTIFIER> TYPE MODULE ELEMENTAL IMPURE NON_RECURSIVE ...
+      program fgennc
+--------------------^
+compilation aborted for genmake_tnc.f (code 1)
+
+==> try again with added '-lnetcdf'
+cat genmake_tnc.F |  /usr/bin/cpp -traditional -P -DWORDLENGTH=4 -DHAVE_SYSTEM -DHAVE_FDATE -DHAVE_ETIME_FCT -DHAVE_CLOC -DHAVE_SIGREG -DHAVE_STAT -I/dss/dsshome1/lrz/sys/spack/release/22.2.1/opt/haswell/netcdf-c/4.7.4-intel-puhckdv/include > genmake_tnc.f \ 
+ &&  ifort  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -O2 -align -ip -fp-model source -xHost -c genmake_tnc.f \ 
+ &&  ifort -shared-intel  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -O2 -align -ip -fp-model source -xHost -o genmake_tnc genmake_tnc.o -L/dss/dsshome1/lrz/sys/spack/release/22.2.1/opt/haswell/netcdf-c/4.7.4-intel-puhckdv/lib -lnetcdf -lhdf5_hl -lhdf5 -lm -lz -lnetcdf
+
+==> try again with added '-lnetcdff -lnetcdf'
+cat genmake_tnc.F |  /usr/bin/cpp -traditional -P -DWORDLENGTH=4 -DHAVE_SYSTEM -DHAVE_FDATE -DHAVE_ETIME_FCT -DHAVE_CLOC -DHAVE_SIGREG -DHAVE_STAT -I/dss/dsshome1/lrz/sys/spack/release/22.2.1/opt/haswell/netcdf-c/4.7.4-intel-puhckdv/include > genmake_tnc.f \ 
+ &&  ifort  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -O2 -align -ip -fp-model source -xHost -c genmake_tnc.f \ 
+ &&  ifort -shared-intel  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -O2 -align -ip -fp-model source -xHost -o genmake_tnc genmake_tnc.o -L/dss/dsshome1/lrz/sys/spack/release/22.2.1/opt/haswell/netcdf-c/4.7.4-intel-puhckdv/lib -lnetcdf -lhdf5_hl -lhdf5 -lm -lz -lnetcdff -lnetcdf
+ --> set HAVE_NETCDF=''
+
+running: check_HAVE_FLUSH()
+===  genmake_tflsh.f  >>>
+      program fgenflsh
+      integer iounit
+      character*9 fname
+      iounit = 26
+      fname = 'tmp.tflsh'
+      open(iounit,FILE=fname,STATUS='unknown')
+      write(iounit,*) 'genmake_tflsh: hello'
+      call flush(iounit)
+      close(iounit)
+      end
+<<<  genmake_tflsh.f  ===
+ifort  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -O2 -align -ip -fp-model source -xHost -c genmake_tflsh.f  \ 
+  &&  ifort -shared-intel  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium -O2 -align -ip -fp-model source -xHost -o genmake_tflsh.o -L/dss/dsshome1/lrz/sys/spack/release/22.2.1/opt/haswell/netcdf-c/4.7.4-intel-puhckdv/lib -lnetcdf -lhdf5_hl -lhdf5 -lm -lz
+/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/ld: cannot find -lhdf5_hl
+/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/bin/ld: cannot find -lhdf5
+ --> set HAVE_FLUSH='f'

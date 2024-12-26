@@ -41,8 +41,9 @@
  &PARM03
  nIter0=0,
 #endTime=43200.,
- nTimeSteps=8640,
- deltaT=10.,
+ nTimeSteps=4,
+#8640,
+ deltaT=5.,
  abEps=0.1,
  pChkptFreq=43200.,
  chkptFreq=7200.,
@@ -55,8 +56,8 @@
 # Gridding parameters
  &PARM04
  usingCartesianGrid=.TRUE.,
- dXspacing=160.,
- dYspacing=160.,
+ dXspacing=20.,
+ dYspacing=20.,
  delZ=50*20.,
  &
 

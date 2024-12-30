@@ -41,9 +41,8 @@
  &PARM03
  nIter0=0,
 #endTime=43200.,
- nTimeSteps=4,
-#8640,
- deltaT=5.,
+ nTimeSteps=43200,
+ deltaT=2,
  abEps=0.1,
  pChkptFreq=43200.,
  chkptFreq=7200.,
@@ -56,9 +55,13 @@
 # Gridding parameters
  &PARM04
  usingCartesianGrid=.TRUE.,
- dXspacing=20.,
- dYspacing=20.,
- delZ=50*20.,
+ dXspacing=2,
+ dYspacing=2,
+ delZ= 	 0.4, 1.2, 2.0, 2.8, 3.6, 4.4, 5.2, 6.0, 6.8, 7.6, 
+	 8.4, 9.2,10.0,10.8,11.6,12.4,13.2,14.0,14.8,15.6,
+	16.4,17.2,18.0,18.8,19.6,20.4,21.2,22.0,22.8,23.6,
+	24.4,25.2,26.0,26.8,27.6,28.4,29.2,30.0,30.8,31.6,
+	32.4,33.2,34.0,34.8,35.6,36.4,37.2,38.0,38.8,39.6,
  &
 
 # Input datasets

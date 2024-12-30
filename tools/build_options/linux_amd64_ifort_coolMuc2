@@ -36,8 +36,8 @@ if test "x$MPI" = xtrue ; then #HE MESSED WITH THIS STUFF HERE#
 # F90C=${F90C:=mpif90}
 # LINK="$F90C -shared-intel -no-ipo"
   CC=mpicc
-  FC=mpif77
-  F90C=mpif90
+  FC=mpiifort
+  F90C=mpiifort
   LINK="$F90C -shared-intel -no-ipo"
 else
   CC=icc

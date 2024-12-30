@@ -1,13 +1,13 @@
 # Multithreaded + multi-processing makefile for:
-#    Linux albedo0 4.18.0-372.13.1.el8_6.x86_64 #1 SMP Wed Jun 29 17:21:09 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+#    Linux cm4login1 6.4.0-150600.23.25-default #1 SMP PREEMPT_DYNAMIC Tue Oct  1 10:54:01 UTC 2024 (ea7c56d) x86_64 x86_64 x86_64 GNU/Linux
 # This makefile was generated automatically on
-#    Thu Dec 26 11:43:54 CET 2024
+#    Fri 27 Dec 2024 05:32:45 PM CET
 # by the command:
-#    ../../tools/genmake2 -mods ../code -optfile ../../tools/build_options/linux_amd64_ifort_albedo
+#    ../../tools/genmake2 -mods ../code -mpi -optfile ../../tools/build_options/linux_amd64_ifort_coolMuc2
 # executed by:
-#    robrow001@albedo0:/albedo/home/robrow001/MITgcm/so_plumes/build
+#    ra85duq@cm4login1:/dss/dsshome1/0B/ra85duq/MITgcm/so_plumes/build
 #
-# OPTFILE="../../tools/build_options/linux_amd64_ifort_albedo"
+# OPTFILE="../../tools/build_options/linux_amd64_ifort_coolMuc2"
 #
 # BUILDDIR     : Directory where object files are written
 # SOURCEDIRS   : Directories containing the source (.F) files
@@ -28,7 +28,7 @@
 ROOTDIR     = ../..
 BUILDDIR    = .
 SOURCEDIRS  =  ../code $(ROOTDIR)/pkg/debug $(ROOTDIR)/pkg/diagnostics $(ROOTDIR)/pkg/generic_advdiff $(ROOTDIR)/pkg/mdsio $(ROOTDIR)/pkg/mom_common $(ROOTDIR)/pkg/mom_fluxform $(ROOTDIR)/pkg/mom_vecinv $(ROOTDIR)/pkg/monitor $(ROOTDIR)/pkg/rw $(ROOTDIR)/eesupp/src $(ROOTDIR)/model/src
-INCLUDEDIRS =  ../code $(ROOTDIR)/pkg/debug $(ROOTDIR)/pkg/diagnostics $(ROOTDIR)/pkg/generic_advdiff $(ROOTDIR)/pkg/mdsio $(ROOTDIR)/pkg/mom_common $(ROOTDIR)/pkg/mom_fluxform $(ROOTDIR)/pkg/mom_vecinv $(ROOTDIR)/pkg/monitor $(ROOTDIR)/pkg/rw $(ROOTDIR)/eesupp/inc $(ROOTDIR)/model/inc
+INCLUDEDIRS =  /dss/lrzsys/sys/spack/release/22.2.1/opt/x86_64/intel-mpi/2019.12.320-gcc-wx7cjlg/compilers_and_libraries_2020.4.320/linux/mpi/intel64/include ../code $(ROOTDIR)/pkg/debug $(ROOTDIR)/pkg/diagnostics $(ROOTDIR)/pkg/generic_advdiff $(ROOTDIR)/pkg/mdsio $(ROOTDIR)/pkg/mom_common $(ROOTDIR)/pkg/mom_fluxform $(ROOTDIR)/pkg/mom_vecinv $(ROOTDIR)/pkg/monitor $(ROOTDIR)/pkg/rw $(ROOTDIR)/eesupp/inc $(ROOTDIR)/model/inc
 EXEDIR      = .
 EXECUTABLE  = $(EXEDIR)/mitgcmuv
 TOOLSDIR    = $(ROOTDIR)/tools
@@ -53,35 +53,35 @@ MAKEDEPEND = $(TOOLSDIR)/xmakedepend
 # Special preprocessor (KAP on DECs, FPP on Crays)
 KPP = 
 # Fortran compiler
-FC = ifort
+FC = mpiifort
 # Fortran compiler
-F90C = ifort
+F90C = mpiifort
 # C compiler
-CC = icc
+CC = mpicc
 # Link editor
-LINK = ifort 
+LINK = mpiifort -shared-intel -no-ipo 
 
 # Defines for CPP
-DEFINES = -DWORDLENGTH=4 -DHAVE_SYSTEM -DHAVE_FDATE -DHAVE_ETIME_FCT -DHAVE_CLOC -DHAVE_SETRLSTK -DHAVE_SIGREG -DHAVE_STAT -DHAVE_FLUSH 
+DEFINES = -DWORDLENGTH=4 -DALLOW_USE_MPI -DHAVE_SYSTEM -DHAVE_FDATE -DHAVE_ETIME_FCT -DHAVE_CLOC -DHAVE_SETRLSTK -DHAVE_SIGREG -DHAVE_STAT -DHAVE_FLUSH 
 # Includes for CPP
-INCLUDES = 
+INCLUDES =  -I/dss/lrzsys/sys/spack/release/22.2.1/opt/x86_64/intel-mpi/2019.12.320-gcc-wx7cjlg/compilers_and_libraries_2020.4.320/linux/mpi/intel64/include
 # default CPP includes for makedepend
-CPPINCLUDES =  -I/albedo/soft/sw/spack-sw/intel-oneapi-mpi/2021.6.0-ypwmdz5/mpi/2021.6.0//include -I/usr/lib/gcc/x86_64-redhat-linux/8/include -I/usr/local/include -I/usr/include
+CPPINCLUDES =  -I/usr/lib64/gcc/x86_64-suse-linux/7/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-suse-linux/7/include-fixed -I/usr/lib64/gcc/x86_64-suse-linux/7/../../../../x86_64-suse-linux/include -I/usr/include
 # Flags for KPP
 KFLAGS1 = 
 KFLAGS2 = 
 # Optim./debug for FC
-FFLAGS =  -W0 -WB -convert big_endian -assume byterecl -fPIC
-FOPTIM = -ip -align -O3 -no-prec-div -fp-model fast=2 -march=core-avx2 -mtune=core-avx2 -qopt-prefetch=5 -unroll-aggressive 
+FFLAGS =  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium
+FOPTIM = -O2 -align -ip -fp-model source -xHost 
 # Optim./debug for FC
-F90FLAGS =  -W0 -WB -convert big_endian -assume byterecl -fPIC
-F90OPTIM = -ip -align -O3 -no-prec-div -fp-model fast=2 -march=core-avx2 -mtune=core-avx2 -qopt-prefetch=5 -unroll-aggressive
+F90FLAGS =  -m64 -nogen-interfaces -convert big_endian -assume byterecl -mcmodel=medium
+F90OPTIM = -O2 -align -ip -fp-model source -xHost
 F90FIXEDFORMAT = -fixed -Tf
 # Flags for CC
-CFLAGS = -O0 -fPIC -ip
+CFLAGS = -O0 -ip -m64 -xHost -mcmodel=medium
 # Files that should not be optimized
-NOOPTFILES = obcs_init_fixed.F obcs_set_connect.F
-NOOPTFLAGS = -ip -align -O1 -no-prec-div -fp-model fast=2 -march=core-avx2
+NOOPTFILES = 
+NOOPTFLAGS = -O0 -g
 # Flags and libraries needed for linking
 LIBS = 
 # Name of the makefile
@@ -1157,6 +1157,11 @@ H_SRC_FILES =  \
  MONITOR_OPTIONS.h \
  RW_MFLDS.h \
  RW_OPTIONS.h \
+ mpicxx.h \
+ mpif.h \
+ mpi.h \
+ mpiof.h \
+ mpio.h \
  BAR2.h \
  BARRIER.h \
  CPP_EEMACROS.h \
@@ -1298,7 +1303,7 @@ CLEAN:
 	-rm -f oad_cp.[0-9][0-9][0-9].?????
 
 makefile:
-	$(TOOLSDIR)/genmake2  "-mods" "../code" "-optfile" "../../tools/build_options/linux_amd64_ifort_albedo"
+	$(TOOLSDIR)/genmake2  "-mods" "../code" "-mpi" "-optfile" "../../tools/build_options/linux_amd64_ifort_coolMuc2"
 cleanlinks:
 	-find . -type l -exec rm {} \;
 
@@ -1316,9 +1321,9 @@ FC_NAMEMANGLE.h:
 BUILD_INFO.h:
 	@echo Creating $@ ...
 	-echo "#define THISVER 'checkpoint69a'" > $@
-	-echo "#define THISUSER 'robrow001'" >> $@
-	-echo "#define THISDATE 'Thu Dec 26 11:43:54 CET 2024'" >> $@
-	-echo "#define THISHOST 'albedo0'" >> $@
+	-echo "#define THISUSER 'ra85duq'" >> $@
+	-echo "#define THISDATE 'Fri 27 Dec 2024 05:32:45 PM CET'" >> $@
+	-echo "#define THISHOST 'cm4login1'" >> $@
 
 # The normal chain of rules is (  .F - .f - .o  )
 
@@ -1326,7 +1331,7 @@ BUILD_INFO.h:
 ## %.o : %.F
 
 # C preprocessing and replacing the _d in constants:
-CPPCMD = cat $< |  cpp -traditional -P $(DEFINES) $(INCLUDES) | $(TOOLSDIR)/set64bitConst.sh
+CPPCMD = cat $< |  /usr/bin/cpp -traditional -P $(DEFINES) $(INCLUDES) | $(TOOLSDIR)/set64bitConst.sh
 
 .F.f:
 	$(CPPCMD)  > $@
@@ -1714,10 +1719,6 @@ svd_touch:
 	cmp ad_config.template AD_CONFIG.h || cat ad_config.template > AD_CONFIG.h
 	@-rm -f ad_config.template
 
-obcs_init_fixed.o: obcs_init_fixed.f
-	$(FC) $(FFLAGS) $(NOOPTFLAGS) -c $<
-obcs_set_connect.o: obcs_set_connect.f
-	$(FC) $(FFLAGS) $(NOOPTFLAGS) -c $<
 # This section creates symbolic links
 
 
@@ -1769,6 +1770,10 @@ obcs_set_connect.o: obcs_set_connect.f
  adams_bashforth2.F adams_bashforth3.F add_walls2masks.F apply_forcing.F calc_3d_diffusivity.F calc_adv_flow.F calc_div_ghat.F calc_eddy_stress.F calc_grad_phi_fv.F calc_grad_phi_hyd.F calc_grad_phi_surf.F calc_grid_angles.F calc_gw.F calc_ivdc.F calc_oce_mxlayer.F calc_phi_hyd.F calc_r_star.F calc_surf_dr.F calc_viscosity.F calc_wsurf_tr.F cg2d_ex0.F cg2d.F cg2d_nsa.F cg2d_sr.F cg3d_ex0.F cg3d.F check_pickup.F config_check.F config_summary.F convective_adjustment.F convective_adjustment_ini.F convectively_mixtracer.F convective_weights.F correction_step.F cycle_ab_tracer.F cycle_tracer.F diags_oceanic_surf_flux.F diags_phi_hyd.F diags_phi_rlow.F diags_rho.F diags_sound_speed.F do_atmospheric_phys.F do_fields_blocking_exchanges.F do_oceanic_phys.F do_stagger_fields_exchanges.F do_statevars_diags.F do_statevars_tave.F do_the_model_io.F do_write_pickup.F dynamics.F external_fields_load.F external_forcing.F external_forcing_surf.F find_alpha.F find_hyd_press_1d.F find_rho.F forcing_surf_relax.F forward_step.F freesurf_rescale_g.F freeze_surface.F grad_sigma.F gsw_teos10.F impldiff.F ini_cartesian_grid.F ini_cg2d.F ini_cg3d.F ini_cori.F ini_curvilinear_grid.F ini_cylinder_grid.F ini_depths.F ini_dynvars.F ini_eos.F ini_ffields.F ini_fields.F ini_forcing.F ini_global_domain.F ini_grid.F ini_linear_phisurf.F ini_local_grid.F ini_masks_etc.F ini_mixing.F ini_mnc_vars.F ini_model_io.F ini_nh_fields.F ini_nh_vars.F ini_nlfs_vars.F ini_parms.F ini_p_ground.F ini_pressure.F ini_psurf.F ini_salt.F ini_sigma_hfac.F ini_spherical_polar_grid.F ini_theta.F initialise_fixed.F initialise_varia.F ini_vel.F ini_vertical_grid.F integrate_for_w.F integr_continuity.F load_fields_driver.F load_grid_spacing.F load_ref_files.F main_do_loop.F momentum_correction_step.F packages_boot.F packages_check.F packages_error_msg.F packages_init_fixed.F packages_init_variables.F packages_print_msg.F packages_readparms.F packages_unused_msg.F packages_write_pickup.F plot_field.F port_rand.F post_cg3d.F pre_cg3d.F pressure_for_eos.F read_pickup.F remove_mean.F reset_nlfs_vars.F rotate_spherical_polar_grid.F rotate_uv2en.F salt_integrate.F seawater.F set_defaults.F set_grid_factors.F set_parms.F set_ref_state.F solve_for_pressure.F solve_pentadiagonal.F solve_tridiagonal.F solve_uv_tridiago.F state_summary.F swfrac.F taueddy_init_varia.F taueddy_tendency_apply.F temp_integrate.F the_main_loop.F the_model_main.F thermodynamics.F timestep.F timestep_tracer.F timestep_wvel.F tracers_correction_step.F tracers_iigw_correction.F turnoff_model_io.F update_cg2d.F update_etah.F update_etaws.F update_masks_etc.F update_r_star.F update_sigma.F update_surf_dr.F write_grid.F write_pickup.F write_state.F :
 	if [ ! -L $@ ]; then $(LN) $(ROOTDIR)/model/src/$@ $@; fi
 
+#  These files are linked from /dss/lrzsys/sys/spack/release/22.2.1/opt/x86_64/intel-mpi/2019.12.320-gcc-wx7cjlg/compilers_and_libraries_2020.4.320/linux/mpi/intel64/include ( aka /dss/lrzsys/sys/spack/release/22.2.1/opt/x86_64/intel-mpi/2019.12.320-gcc-wx7cjlg/compilers_and_libraries_2020.4.320/linux/mpi/intel64/include )
+ mpicxx.h mpif.h mpi.h mpiof.h mpio.h :
+	if [ ! -L $@ ]; then $(LN) /dss/lrzsys/sys/spack/release/22.2.1/opt/x86_64/intel-mpi/2019.12.320-gcc-wx7cjlg/compilers_and_libraries_2020.4.320/linux/mpi/intel64/include/$@ $@; fi
+
 #  These files are linked from $(ROOTDIR)/eesupp/inc ( aka ../../eesupp/inc )
  BAR2.h BARRIER.h CPP_EEMACROS.h CPP_EEOPTIONS.h CUMULSUM.h DEF_IN_MAKEFILE.h EEBUFF_SCPU.h EEPARAMS.h EESUPPORT.h EXCH.h GLOBAL_MAX.h GLOBAL_SUM.h MAIN_PDIRECTIVES1.h MAIN_PDIRECTIVES2.h MPI_INFO.h SIGREG.h :
 	if [ ! -L $@ ]; then $(LN) $(ROOTDIR)/eesupp/inc/$@ $@; fi
@@ -1797,8 +1802,8 @@ add_walls2masks.f: RECIP_DYG_MACROS.h RECIP_DYU_MACROS.h RECIP_HFACC_MACROS.h
 add_walls2masks.f: RECIP_HFACS_MACROS.h RECIP_HFACW_MACROS.h SIZE.h
 add_walls2masks.f: TANPHIATU_MACROS.h TANPHIATV_MACROS.h
 add_walls2masks.f: /usr/include/stdc-predef.h XC_MACROS.h YC_MACROS.h
-all_proc_die.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
-all_proc_die.f: /usr/include/stdc-predef.h
+all_proc_die.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
+all_proc_die.f: SIZE.h /usr/include/stdc-predef.h
 apply_forcing.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h DXC_MACROS.h
 apply_forcing.f: DXF_MACROS.h DXG_MACROS.h DXV_MACROS.h DYC_MACROS.h
 apply_forcing.f: DYF_MACROS.h DYG_MACROS.h DYNVARS.h DYU_MACROS.h EEPARAMS.h
@@ -1812,12 +1817,12 @@ apply_forcing.f: RECIP_HFACC_MACROS.h RECIP_HFACS_MACROS.h
 apply_forcing.f: RECIP_HFACW_MACROS.h SIZE.h SURFACE.h TANPHIATU_MACROS.h
 apply_forcing.f: TANPHIATV_MACROS.h /usr/include/stdc-predef.h XC_MACROS.h
 apply_forcing.f: YC_MACROS.h
-bar2.f: BAR2.h CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
-bar2.f: /usr/include/stdc-predef.h
+bar2.f: BAR2.h CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
+bar2.f: SIZE.h /usr/include/stdc-predef.h
 bar_check.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h SIZE.h
 bar_check.f: /usr/include/stdc-predef.h
 barrier.f: BARRIER.h CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-barrier.f: SIZE.h /usr/include/stdc-predef.h
+barrier.f: mpif.h SIZE.h /usr/include/stdc-predef.h
 calc_3d_diffusivity.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h
 calc_3d_diffusivity.f: DXC_MACROS.h DXF_MACROS.h DXG_MACROS.h DXV_MACROS.h
 calc_3d_diffusivity.f: DYC_MACROS.h DYF_MACROS.h DYG_MACROS.h DYNVARS.h
@@ -2052,12 +2057,12 @@ cg3d.f: TANPHIATU_MACROS.h TANPHIATV_MACROS.h /usr/include/stdc-predef.h
 cg3d.f: XC_MACROS.h YC_MACROS.h
 check_pickup.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h EEPARAMS.h
 check_pickup.f: PARAMS.h RESTART.h SIZE.h /usr/include/stdc-predef.h
-check_threads.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
-check_threads.f: /usr/include/stdc-predef.h
+check_threads.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
+check_threads.f: SIZE.h /usr/include/stdc-predef.h
 chksum_tiled.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h DEBUG_OPTIONS.h
 chksum_tiled.f: EEPARAMS.h PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
 comm_stats.f: BAR2.h CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-comm_stats.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+comm_stats.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 config_check.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h EEPARAMS.h
 config_check.f: MOM_COMMON_OPTIONS.h PACKAGES_CONFIG.h PARAMS.h SIZE.h
 config_check.f: /usr/include/stdc-predef.h
@@ -2134,7 +2139,7 @@ correction_step.f: RECIP_HFACS_MACROS.h RECIP_HFACW_MACROS.h SIZE.h
 correction_step.f: TANPHIATU_MACROS.h TANPHIATV_MACROS.h
 correction_step.f: /usr/include/stdc-predef.h XC_MACROS.h YC_MACROS.h
 cumulsum_z_tile.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CUMULSUM.h EEPARAMS.h
-cumulsum_z_tile.f: EESUPPORT.h PACKAGES_CONFIG.h SIZE.h
+cumulsum_z_tile.f: EESUPPORT.h mpif.h PACKAGES_CONFIG.h SIZE.h
 cumulsum_z_tile.f: /usr/include/stdc-predef.h
 cycle_ab_tracer.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h EEPARAMS.h
 cycle_ab_tracer.f: PARAMS.h SIZE.h /usr/include/stdc-predef.h
@@ -2524,7 +2529,7 @@ diagstats_mnc_out.f: DXC_MACROS.h DXF_MACROS.h DXG_MACROS.h DXV_MACROS.h
 diagstats_mnc_out.f: DYC_MACROS.h DYF_MACROS.h DYG_MACROS.h DYU_MACROS.h
 diagstats_mnc_out.f: EEPARAMS.h EESUPPORT.h FCORI_MACROS.h GRID.h
 diagstats_mnc_out.f: GRID_MACROS.h HFACC_MACROS.h HFACS_MACROS.h
-diagstats_mnc_out.f: HFACW_MACROS.h MASKS_MACROS.h MASKW_MACROS.h
+diagstats_mnc_out.f: HFACW_MACROS.h MASKS_MACROS.h MASKW_MACROS.h mpif.h
 diagstats_mnc_out.f: PACKAGES_CONFIG.h PARAMS.h RA_MACROS.h RAS_MACROS.h
 diagstats_mnc_out.f: RAW_MACROS.h RECIP_DXC_MACROS.h RECIP_DXF_MACROS.h
 diagstats_mnc_out.f: RECIP_DXG_MACROS.h RECIP_DXV_MACROS.h RECIP_DYC_MACROS.h
@@ -2628,20 +2633,20 @@ dynamics.f: RECIP_DYF_MACROS.h RECIP_DYG_MACROS.h RECIP_DYU_MACROS.h
 dynamics.f: RECIP_HFACC_MACROS.h RECIP_HFACS_MACROS.h RECIP_HFACW_MACROS.h
 dynamics.f: SIZE.h TANPHIATU_MACROS.h TANPHIATV_MACROS.h
 dynamics.f: /usr/include/stdc-predef.h XC_MACROS.h YC_MACROS.h
-eeboot.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
+eeboot.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
 eeboot.f: PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
-eeboot_minimal.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
+eeboot_minimal.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
 eeboot_minimal.f: PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
 eedata_example.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h SIZE.h
 eedata_example.f: /usr/include/stdc-predef.h
-eedie.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
+eedie.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h SIZE.h
 eedie.f: /usr/include/stdc-predef.h
 eeintro_msg.f: BUILD_INFO.h CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h
-eeintro_msg.f: EESUPPORT.h SIZE.h /usr/include/stdc-predef.h
+eeintro_msg.f: EESUPPORT.h mpif.h SIZE.h /usr/include/stdc-predef.h
 eeset_parms.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h EXCH.h
-eeset_parms.f: SIZE.h /usr/include/stdc-predef.h
-eewrite_eeenv.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
-eewrite_eeenv.f: /usr/include/stdc-predef.h
+eeset_parms.f: mpif.h SIZE.h /usr/include/stdc-predef.h
+eewrite_eeenv.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
+eewrite_eeenv.f: SIZE.h /usr/include/stdc-predef.h
 exch0_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h SIZE.h
 exch0_r4.f: /usr/include/stdc-predef.h
 exch0_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h SIZE.h
@@ -2707,41 +2712,41 @@ exch_3d_rl.f: SIZE.h /usr/include/stdc-predef.h
 exch_3d_rs.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h PACKAGES_CONFIG.h
 exch_3d_rs.f: SIZE.h /usr/include/stdc-predef.h
 exch_cycle_ebl.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h EXCH.h
-exch_cycle_ebl.f: SIZE.h /usr/include/stdc-predef.h
+exch_cycle_ebl.f: mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_init.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h EXCH.h
-exch_init.f: SIZE.h /usr/include/stdc-predef.h
+exch_init.f: mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_r4_recv_get_x.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_r4_recv_get_x.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_r4_recv_get_x.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_r4_recv_get_y.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_r4_recv_get_y.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_r4_recv_get_y.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_r4_send_put_x.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_r4_send_put_x.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_r4_send_put_x.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_r4_send_put_y.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_r4_send_put_y.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_r4_send_put_y.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_r8_recv_get_x.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_r8_recv_get_x.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_r8_recv_get_x.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_r8_recv_get_y.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_r8_recv_get_y.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_r8_recv_get_y.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_r8_send_put_x.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_r8_send_put_x.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_r8_send_put_x.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_r8_send_put_y.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_r8_send_put_y.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_r8_send_put_y.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_rl_recv_get_x.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_rl_recv_get_x.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_rl_recv_get_x.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_rl_recv_get_y.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_rl_recv_get_y.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_rl_recv_get_y.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_rl_send_put_x.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_rl_send_put_x.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_rl_send_put_x.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_rl_send_put_y.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_rl_send_put_y.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_rl_send_put_y.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_rs_recv_get_x.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_rs_recv_get_x.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_rs_recv_get_x.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_rs_recv_get_y.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_rs_recv_get_y.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_rs_recv_get_y.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_rs_send_put_x.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_rs_send_put_x.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_rs_send_put_x.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_rs_send_put_y.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-exch_rs_send_put_y.f: EXCH.h SIZE.h /usr/include/stdc-predef.h
+exch_rs_send_put_y.f: EXCH.h mpif.h SIZE.h /usr/include/stdc-predef.h
 exch_s3d_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h PACKAGES_CONFIG.h
 exch_s3d_r4.f: SIZE.h /usr/include/stdc-predef.h
 exch_s3d_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h PACKAGES_CONFIG.h
@@ -3847,37 +3852,37 @@ gad_u3c4_impl_r.f: /usr/include/stdc-predef.h XC_MACROS.h YC_MACROS.h
 gad_write_pickup.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h EEPARAMS.h
 gad_write_pickup.f: GAD.h GAD_OPTIONS.h GAD_SOM_VARS.h PACKAGES_CONFIG.h
 gad_write_pickup.f: PARAMS.h SIZE.h /usr/include/stdc-predef.h
-gather_2d_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
+gather_2d_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
 gather_2d_r4.f: PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
-gather_2d_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
+gather_2d_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
 gather_2d_r8.f: PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
 gather_2d_wh_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-gather_2d_wh_r4.f: PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
+gather_2d_wh_r4.f: mpif.h PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
 gather_2d_wh_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-gather_2d_wh_r8.f: PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
-gather_vec_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
-gather_vec_r4.f: /usr/include/stdc-predef.h
-gather_vec_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
-gather_vec_r8.f: /usr/include/stdc-predef.h
+gather_2d_wh_r8.f: mpif.h PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
+gather_vec_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
+gather_vec_r4.f: SIZE.h /usr/include/stdc-predef.h
+gather_vec_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
+gather_vec_r8.f: SIZE.h /usr/include/stdc-predef.h
 gather_xz.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h EEPARAMS.h
-gather_xz.f: EESUPPORT.h SIZE.h /usr/include/stdc-predef.h
+gather_xz.f: EESUPPORT.h mpif.h SIZE.h /usr/include/stdc-predef.h
 gather_yz.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h EEPARAMS.h
-gather_yz.f: EESUPPORT.h SIZE.h /usr/include/stdc-predef.h
+gather_yz.f: EESUPPORT.h mpif.h SIZE.h /usr/include/stdc-predef.h
 get_periodic_interval.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h
 get_periodic_interval.f: /usr/include/stdc-predef.h
 get_write_global_fld.f: CPP_EEMACROS.h CPP_EEOPTIONS.h
 get_write_global_fld.f: /usr/include/stdc-predef.h
 global_max.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-global_max.f: GLOBAL_MAX.h SIZE.h /usr/include/stdc-predef.h
+global_max.f: GLOBAL_MAX.h mpif.h SIZE.h /usr/include/stdc-predef.h
 global_sum.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-global_sum.f: GLOBAL_SUM.h SIZE.h /usr/include/stdc-predef.h
+global_sum.f: GLOBAL_SUM.h mpif.h SIZE.h /usr/include/stdc-predef.h
 global_sum_singlecpu.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEBUFF_SCPU.h
-global_sum_singlecpu.f: EEPARAMS.h EESUPPORT.h GLOBAL_SUM.h PACKAGES_CONFIG.h
-global_sum_singlecpu.f: SIZE.h /usr/include/stdc-predef.h
+global_sum_singlecpu.f: EEPARAMS.h EESUPPORT.h GLOBAL_SUM.h mpif.h
+global_sum_singlecpu.f: PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
 global_sum_tile.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-global_sum_tile.f: GLOBAL_SUM.h SIZE.h /usr/include/stdc-predef.h
+global_sum_tile.f: GLOBAL_SUM.h mpif.h SIZE.h /usr/include/stdc-predef.h
 global_sum_vector.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-global_sum_vector.f: GLOBAL_SUM.h SIZE.h /usr/include/stdc-predef.h
+global_sum_vector.f: GLOBAL_SUM.h mpif.h SIZE.h /usr/include/stdc-predef.h
 grad_sigma.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h DXC_MACROS.h
 grad_sigma.f: DXF_MACROS.h DXG_MACROS.h DXV_MACROS.h DYC_MACROS.h DYF_MACROS.h
 grad_sigma.f: DYG_MACROS.h DYU_MACROS.h EEPARAMS.h FCORI_MACROS.h GRID.h
@@ -3940,8 +3945,8 @@ ini_cg3d.f: RECIP_HFACW_MACROS.h SIZE.h SOLVE_FOR_PRESSURE3D.h SURFACE.h
 ini_cg3d.f: TANPHIATU_MACROS.h TANPHIATV_MACROS.h /usr/include/stdc-predef.h
 ini_cg3d.f: XC_MACROS.h YC_MACROS.h
 ini_communication_patterns.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h
-ini_communication_patterns.f: EESUPPORT.h EXCH.h PACKAGES_CONFIG.h SIZE.h
-ini_communication_patterns.f: /usr/include/stdc-predef.h
+ini_communication_patterns.f: EESUPPORT.h EXCH.h mpif.h PACKAGES_CONFIG.h
+ini_communication_patterns.f: SIZE.h /usr/include/stdc-predef.h
 ini_cori.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h DXC_MACROS.h
 ini_cori.f: DXF_MACROS.h DXG_MACROS.h DXV_MACROS.h DYC_MACROS.h DYF_MACROS.h
 ini_cori.f: DYG_MACROS.h DYU_MACROS.h EEPARAMS.h FCORI_MACROS.h GRID.h
@@ -4101,8 +4106,8 @@ ini_mnc_vars.f: RECIP_HFACC_MACROS.h RECIP_HFACS_MACROS.h RECIP_HFACW_MACROS.h
 ini_mnc_vars.f: SIZE.h TANPHIATU_MACROS.h TANPHIATV_MACROS.h
 ini_mnc_vars.f: /usr/include/stdc-predef.h XC_MACROS.h YC_MACROS.h
 ini_model_io.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h EEBUFF_SCPU.h
-ini_model_io.f: EEPARAMS.h EESUPPORT.h PACKAGES_CONFIG.h PARAMS.h RESTART.h
-ini_model_io.f: SIZE.h /usr/include/stdc-predef.h
+ini_model_io.f: EEPARAMS.h EESUPPORT.h mpif.h PACKAGES_CONFIG.h PARAMS.h
+ini_model_io.f: RESTART.h SIZE.h /usr/include/stdc-predef.h
 ini_nh_fields.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h DXC_MACROS.h
 ini_nh_fields.f: DXF_MACROS.h DXG_MACROS.h DXV_MACROS.h DYC_MACROS.h
 ini_nh_fields.f: DYF_MACROS.h DYG_MACROS.h DYU_MACROS.h EEPARAMS.h
@@ -4166,8 +4171,8 @@ ini_pressure.f: RECIP_DYF_MACROS.h RECIP_DYG_MACROS.h RECIP_DYU_MACROS.h
 ini_pressure.f: RECIP_HFACC_MACROS.h RECIP_HFACS_MACROS.h RECIP_HFACW_MACROS.h
 ini_pressure.f: SIZE.h TANPHIATU_MACROS.h TANPHIATV_MACROS.h
 ini_pressure.f: /usr/include/stdc-predef.h XC_MACROS.h YC_MACROS.h
-ini_procs.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
-ini_procs.f: /usr/include/stdc-predef.h
+ini_procs.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
+ini_procs.f: SIZE.h /usr/include/stdc-predef.h
 ini_psurf.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h DXC_MACROS.h
 ini_psurf.f: DXF_MACROS.h DXG_MACROS.h DXV_MACROS.h DYC_MACROS.h DYF_MACROS.h
 ini_psurf.f: DYG_MACROS.h DYNVARS.h DYU_MACROS.h EEPARAMS.h FCORI_MACROS.h
@@ -4230,7 +4235,7 @@ ini_theta.f: RECIP_DYU_MACROS.h RECIP_HFACC_MACROS.h RECIP_HFACS_MACROS.h
 ini_theta.f: RECIP_HFACW_MACROS.h SIZE.h TANPHIATU_MACROS.h TANPHIATV_MACROS.h
 ini_theta.f: /usr/include/stdc-predef.h XC_MACROS.h YC_MACROS.h
 ini_threading_environment.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h
-ini_threading_environment.f: EESUPPORT.h PACKAGES_CONFIG.h SIZE.h
+ini_threading_environment.f: EESUPPORT.h mpif.h PACKAGES_CONFIG.h SIZE.h
 ini_threading_environment.f: /usr/include/stdc-predef.h
 initialise_fixed.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h EEPARAMS.h
 initialise_fixed.f: PACKAGES_CONFIG.h PARAMS.h SIZE.h
@@ -4325,8 +4330,8 @@ main.f: DXG_MACROS.h DXV_MACROS.h DYC_MACROS.h DYF_MACROS.h DYG_MACROS.h
 main.f: DYNVARS.h DYU_MACROS.h EEPARAMS.h EESUPPORT.h FCORI_MACROS.h FFIELDS.h
 main.f: GRID.h GRID_MACROS.h HFACC_MACROS.h HFACS_MACROS.h HFACW_MACROS.h
 main.f: MAIN_PDIRECTIVES1.h MAIN_PDIRECTIVES2.h MASKS_MACROS.h MASKW_MACROS.h
-main.f: PACKAGES_CONFIG.h PARAMS.h RA_MACROS.h RAS_MACROS.h RAW_MACROS.h
-main.f: RECIP_DXC_MACROS.h RECIP_DXF_MACROS.h RECIP_DXG_MACROS.h
+main.f: mpif.h PACKAGES_CONFIG.h PARAMS.h RA_MACROS.h RAS_MACROS.h
+main.f: RAW_MACROS.h RECIP_DXC_MACROS.h RECIP_DXF_MACROS.h RECIP_DXG_MACROS.h
 main.f: RECIP_DXV_MACROS.h RECIP_DYC_MACROS.h RECIP_DYF_MACROS.h
 main.f: RECIP_DYG_MACROS.h RECIP_DYU_MACROS.h RECIP_HFACC_MACROS.h
 main.f: RECIP_HFACS_MACROS.h RECIP_HFACW_MACROS.h SIGREG.h SIZE.h SURFACE.h
@@ -4334,8 +4339,8 @@ main.f: TANPHIATU_MACROS.h TANPHIATV_MACROS.h /usr/include/stdc-predef.h
 main.f: XC_MACROS.h YC_MACROS.h
 master_cpu_io.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h SIZE.h
 master_cpu_io.f: /usr/include/stdc-predef.h
-master_cpu_thread.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h SIZE.h
-master_cpu_thread.f: /usr/include/stdc-predef.h
+master_cpu_thread.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
+master_cpu_thread.f: mpif.h SIZE.h /usr/include/stdc-predef.h
 mds_byteswapi4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h /usr/include/stdc-predef.h
 mds_byteswapr4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h /usr/include/stdc-predef.h
 mds_byteswapr8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h /usr/include/stdc-predef.h
@@ -5537,7 +5542,7 @@ pressure_for_eos.f: RECIP_DYU_MACROS.h RECIP_HFACC_MACROS.h
 pressure_for_eos.f: RECIP_HFACS_MACROS.h RECIP_HFACW_MACROS.h SIZE.h
 pressure_for_eos.f: TANPHIATU_MACROS.h TANPHIATV_MACROS.h
 pressure_for_eos.f: /usr/include/stdc-predef.h XC_MACROS.h YC_MACROS.h
-print.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
+print.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h SIZE.h
 print.f: /usr/include/stdc-predef.h
 read_fld_xy_rl.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h EEPARAMS.h
 read_fld_xy_rl.f: PACKAGES_CONFIG.h PARAMS.h RW_OPTIONS.h SIZE.h
@@ -5634,22 +5639,22 @@ salt_integrate.f: RECIP_DYU_MACROS.h RECIP_HFACC_MACROS.h RECIP_HFACS_MACROS.h
 salt_integrate.f: RECIP_HFACW_MACROS.h RESTART.h SIZE.h TANPHIATU_MACROS.h
 salt_integrate.f: TANPHIATV_MACROS.h /usr/include/stdc-predef.h XC_MACROS.h
 salt_integrate.f: YC_MACROS.h
-scatter_2d_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
+scatter_2d_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
 scatter_2d_r4.f: PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
-scatter_2d_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
+scatter_2d_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
 scatter_2d_r8.f: PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
 scatter_2d_wh_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-scatter_2d_wh_r4.f: PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
+scatter_2d_wh_r4.f: mpif.h PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
 scatter_2d_wh_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h
-scatter_2d_wh_r8.f: PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
-scatter_vec_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
-scatter_vec_r4.f: /usr/include/stdc-predef.h
-scatter_vec_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
-scatter_vec_r8.f: /usr/include/stdc-predef.h
-scatter_xz.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
-scatter_xz.f: /usr/include/stdc-predef.h
-scatter_yz.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
-scatter_yz.f: /usr/include/stdc-predef.h
+scatter_2d_wh_r8.f: mpif.h PACKAGES_CONFIG.h SIZE.h /usr/include/stdc-predef.h
+scatter_vec_r4.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
+scatter_vec_r4.f: SIZE.h /usr/include/stdc-predef.h
+scatter_vec_r8.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
+scatter_vec_r8.f: SIZE.h /usr/include/stdc-predef.h
+scatter_xz.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
+scatter_xz.f: SIZE.h /usr/include/stdc-predef.h
+scatter_yz.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h
+scatter_yz.f: SIZE.h /usr/include/stdc-predef.h
 seawater.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h
 seawater.f: /usr/include/stdc-predef.h
 set_defaults.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h EEPARAMS.h
@@ -5771,7 +5776,7 @@ thermodynamics.f: RECIP_DYU_MACROS.h RECIP_HFACC_MACROS.h RECIP_HFACS_MACROS.h
 thermodynamics.f: RECIP_HFACW_MACROS.h RESTART.h SIZE.h SURFACE.h
 thermodynamics.f: TANPHIATU_MACROS.h TANPHIATV_MACROS.h
 thermodynamics.f: /usr/include/stdc-predef.h XC_MACROS.h YC_MACROS.h
-timers.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h SIZE.h
+timers.f: CPP_EEMACROS.h CPP_EEOPTIONS.h EEPARAMS.h EESUPPORT.h mpif.h SIZE.h
 timers.f: /usr/include/stdc-predef.h
 timestep.f: CPP_EEMACROS.h CPP_EEOPTIONS.h CPP_OPTIONS.h DXC_MACROS.h
 timestep.f: DXF_MACROS.h DXG_MACROS.h DXV_MACROS.h DYC_MACROS.h DYF_MACROS.h

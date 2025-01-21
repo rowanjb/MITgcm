@@ -1,5 +1,6 @@
 # Packages
  &PACKAGES
+ useRBCS=.TRUE.,
 #useMNC=.TRUE.,
  useDiagnostics=.TRUE.,
  &

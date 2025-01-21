@@ -1,2 +1,9 @@
-run,		computer,	date,		horiz res,	vert res,
-mrb_001,	cm4,		27.12.2024,	2,		variable
+run,		computer,	date,		horiz res,	vert res,	desc,
+mrb_001,	cm4,		27.12.2024,	2,		variable,	First production run,
+mrb_002,	Albedo, 	10.01.2024,	20,		variable,	Init from WOA and srfc forcing reduced,
+mrb_003, 	Albedo,         17.01.2024,     20,             variable,       Same as 002 but with bdry sponges in T and S with tau=86400,
+mrb_004, 	Albedo,         17.01.2024,     20,             variable,       Same as 002 but with bdry sponges in T and S with tau=8640,
+mrb_005,        Albedo,         20.01.2024,     20,             variable,       Same as 002 but with bdry sponges in T and S with tau=864 *crashes early*,
+mrb_006,        Albedo,         20.01.2024,     20,             variable,       Same as 002 but with bdry sponges in T and S with tau=864000,
+mrb_007,        Albedo,         20.01.2024,     20,             variable,       Same as 003 but with sponge at bottom too (tau=86400),
+mrb_008,        Albedo,         21.01.2024,     20,             variable,       Same as 007 but with tau=8640, 

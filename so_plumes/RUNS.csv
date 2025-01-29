@@ -1,9 +1,21 @@
-run,		computer,	date,		horiz res,	vert res,	desc,
-mrb_001,	cm4,		27.12.2024,	2,		variable,	First production run,
-mrb_002,	Albedo, 	10.01.2024,	20,		variable,	Init from WOA and srfc forcing reduced,
-mrb_003, 	Albedo,         17.01.2024,     20,             variable,       Same as 002 but with bdry sponges in T and S with tau=86400,
-mrb_004, 	Albedo,         17.01.2024,     20,             variable,       Same as 002 but with bdry sponges in T and S with tau=8640,
-mrb_005,        Albedo,         20.01.2024,     20,             variable,       Same as 002 but with bdry sponges in T and S with tau=864 *crashes early*,
-mrb_006,        Albedo,         20.01.2024,     20,             variable,       Same as 002 but with bdry sponges in T and S with tau=864000,
-mrb_007,        Albedo,         20.01.2024,     20,             variable,       Same as 003 but with sponge at bottom too (tau=86400),
-mrb_008,        Albedo,         21.01.2024,     20,             variable,       Same as 007 but with tau=8640, 
+run,		computer,	date,		horiz res,	vert res,	dt,	desc,
+mrb_001,	cm4,		27.12.2024,	2,		variable,	-,	First production run,
+mrb_002,	Albedo, 	10.01.2025,	20,		variable,	3,	Init from WOA and srfc forcing reduced,
+mrb_003, 	Albedo,         17.01.2025,     20,             variable,       3,	Same as 002 but with bdry sponges in T and S with tau=86400,
+mrb_004, 	Albedo,         17.01.2025,     20,             variable,       3,	Same as 002 but with bdry sponges in T and S with tau=8640,
+mrb_005,        Albedo,         20.01.2025,     20,             variable,       3,	Same as 002 but with bdry sponges in T and S with tau=864 *crashes early*,
+mrb_006,        Albedo,         20.01.2025,     20,             variable,       3,	Same as 002 but with bdry sponges in T and S with tau=864000,
+mrb_007,        Albedo,         20.01.2025,     20,             variable,       3,	Same as 003 but with sponge at bottom too (tau=86400),
+mrb_008,        Albedo,         21.01.2025,     20,             variable,       3,	Same as 007 but with tau=8640,
+mrb_009,        Albedo,         22.01.2025,     20,             variable,       3, 	Same as 007 but with tau=864000,
+mrb_010,        Albedo,         22.01.2025,     20,             variable,       3, 	Same as 007 but with Qnet/2 *crashes early*,
+mrb_011,        Albedo,         28.01.2025,     20,             variable,       3,      Same as 010 but with a gentler relax mask---hoping to stop the crashing,
+
+
+mrb_012,        Albedo,         29.01.2024,     20,             variable,       3,      2-layer fluid with no sponges,
+mrb_013,        Albedo,         29.01.2024,     20,             variable,       3,      5-side 5-cell sponges with tau=86400 and no surface forcing,
+
+
+
+mrb_0**,        Albedo,         .2024,     20,             variable,       3,      Same as 011 but with a bigget domain to move the boundaries farther out,
+#bigger domain, gentler Mrbc, gentler heat loss,... 

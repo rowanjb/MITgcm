@@ -66,7 +66,7 @@
 
 # Input datasets
  &PARM05
- surfQnetFile=    'Qnet_WOA.bin',
+ surfQnetFile=     'Qnet_0W.bin',
  hydrogThetaFile=    'T.WOA.bin',
  hydrogSaltFile=     'S.WOA.bin',
  pSurfInitFile=   'Eta.flat.bin',

@@ -4,7 +4,7 @@
  useRBCsalt=.TRUE.,
  tauRelaxT=86400.,
  tauRelaxS=86400.,
- relaxMaskFile='relax_mask_incl_bottom.bin'
+ relaxMaskFile='relax_mask_incl_bottom_gentle_grad.bin',
  relaxTFile='T.WOA.bin',
  relaxSFile='S.WOA.bin',
 #---------------------------------------

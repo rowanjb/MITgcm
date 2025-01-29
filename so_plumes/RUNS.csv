@@ -9,13 +9,12 @@ mrb_007,        Albedo,         20.01.2025,     20,             variable,       
 mrb_008,        Albedo,         21.01.2025,     20,             variable,       3,	Same as 007 but with tau=8640,
 mrb_009,        Albedo,         22.01.2025,     20,             variable,       3, 	Same as 007 but with tau=864000,
 mrb_010,        Albedo,         22.01.2025,     20,             variable,       3, 	Same as 007 but with Qnet/2 *crashes early*,
-mrb_011,        Albedo,         28.01.2025,     20,             variable,       3,      Same as 010 but with a gentler relax mask---hoping to stop the crashing,
+mrb_011,        Albedo,         28.01.2025,     20,             variable,       3,      Same as 010 but with a gentler relax mask---stops the crashing,
 
 
-mrb_012,        Albedo,         29.01.2024,     20,             variable,       3,      2-layer fluid with no sponges,
-mrb_013,        Albedo,         29.01.2024,     20,             variable,       3,      5-side 5-cell sponges with tau=86400 and no surface forcing,
+mrb_012,        Albedo,         29.01.2025,     20,             variable,       3,      2-layer fluid with no sponges, **accidentally compiled with the rbcs package in CODE,
+mrb_013,        Albedo,         29.01.2025,     20,             variable,       3,      5-side 5-cell sponges with tau=86400 and no surface forcing,
 
 
 
-mrb_0**,        Albedo,         .2024,     20,             variable,       3,      Same as 011 but with a bigget domain to move the boundaries farther out,
-#bigger domain, gentler Mrbc, gentler heat loss,... 
+mrb_014,        Albedo,         29.01.2025,     20,             variable,       3,      Same as 011 but with a bigget domain (150x150) to move the boundaries farther out,

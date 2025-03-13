@@ -1,20 +1,43 @@
-run,		computer,	date,		horiz res,	vert res,	dt,	desc,
-mrb_001,	cm4,		27.12.2024,	2,		variable,	-,	First production run,
-mrb_002,	Albedo, 	10.01.2025,	20,		variable,	3,	Init from WOA and srfc forcing reduced,
-mrb_003, 	Albedo,         17.01.2025,     20,             variable,       3,	Same as 002 but with bdry sponges in T and S with tau=86400,
-mrb_004, 	Albedo,         17.01.2025,     20,             variable,       3,	Same as 002 but with bdry sponges in T and S with tau=8640,
-mrb_005,        Albedo,         20.01.2025,     20,             variable,       3,	Same as 002 but with bdry sponges in T and S with tau=864 *crashes early*,
-mrb_006,        Albedo,         20.01.2025,     20,             variable,       3,	Same as 002 but with bdry sponges in T and S with tau=864000,
-mrb_007,        Albedo,         20.01.2025,     20,             variable,       3,	Same as 003 but with sponge at bottom too (tau=86400),
-mrb_008,        Albedo,         21.01.2025,     20,             variable,       3,	Same as 007 but with tau=8640,
-mrb_009,        Albedo,         22.01.2025,     20,             variable,       3, 	Same as 007 but with tau=864000,
-mrb_010,        Albedo,         22.01.2025,     20,             variable,       3, 	Same as 007 but with Qnet/2 *crashes early*,
-mrb_011,        Albedo,         28.01.2025,     20,             variable,       3,      Same as 010 but with a gentler relax mask---stops the crashing,
+run,        computer,   date,       h res,  v res,      domain,     dt, rbcs,       eos,    f0,         beta,       description,
+mrb_001,    cm4,        27.12.2024, 2,      variable,   100x100,    -,  no,         lin,    1.E-4,      0.E-11,     First production run,
+mrb_002**,  Albedo,     10.01.2025, 20,     variable,   100x100,    3,  no,         lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=150W,
+mrb_003**,  Albedo,     17.01.2025, 20,     variable,   100x100,    3,  tau=86400,  lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=150W and side sponges 2 cells deep,
+mrb_004*,   Albedo,     17.01.2025, 20,     variable,   100x100,    3,  tau=8640,   lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=150W and side sponges 2 cells deep,
+mrb_005*,   Albedo,     20.01.2025, 20,     variable,   100x100,    3,  tau=864,    lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=150W and side sponges 2 cells deep *crashes*,
+mrb_006*,   Albedo,     20.01.2025, 20,     variable,   100x100,    3,  tau=864000, lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=150W and side sponges 2 cells deep,
+mrb_007**,  Albedo,     20.01.2025, 20,     variable,   100x100,    3,  tau=86400,  lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=150W and side+bottom sponges 2 cells deep,
+mrb_008*,   Albedo,     21.01.2025, 20,     variable,   100x100,    3,  tau=8640,   lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=150W and side+bottom sponges 2 cells deep,
+mrb_009*,   Albedo,     22.01.2025, 20,     variable,   100x100,    3,  tau=864000, lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=150W and side+bottom sponges 2 cells deep,
+mrb_010*,   Albedo,     22.01.2025, 20,     variable,   100x100,    3,  tau=86400,  lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=75W and side+bottom sponges 2 cells deep *crashes*,
+mrb_011,    Albedo,     28.01.2025, 20,     variable,   100x100,    3,  tau=86400,  lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=75W and side+bottom sponges 5 cells deep,
+mrb_012*,   Albedo,     29.01.2025, 20,     variable,   100x100,    3,  no,         lin,    1.E-4,      0.E-11,     2-layer fluid with no sponges *accidentally compiled with the rbcs package in CODE so might need to redo*,
+mrb_013**,  Albedo,     29.01.2025, 20,     variable,   100x100,    3,  tau=86400,  lin,    1.E-,       0.E-11,     Initial T and S from WOA and Q=0W and side+bottom sponges 5 cells deep,
+mrb_014**,  Albedo,     29.01.2025, 20,     variable,   150x150,    3,  tau=8640000,lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=75W and side+bottom sponges 5 cells deep *crashes with tau/10 and tau/100*,
+mrb_015**,  Albedo,     30.01.2025, 20,     variable,   150x150,    3,  no,         lin,    1.E-4,      0.E-11,     Initial T and S from WOA and circular Q=75W and no sponges,
+mrb_016**,  Albedo,     04.02.2025, 20,     variable,   100x100,    3,  no,         lin,    -1.358E-4,  -2.129E-11, Initial T (in-situ) and S (prac) from WOA (aut) and Q=0W and no sponges *noticed issues; ended up being sBeta=0*,
+mrb_017**,  Albedo,     05.02.2025, 20,     variable,   100x100,    3,  no,         lin,    -1.358E-4,  -2.129E-11, Initial T (in-situ) and S (prac) from WOA (aut) and Q=75W and no sponges, #cf mrb016
+mrb_018**,  Albedo,     05.02.2025, 20,     variable,   100x100,    3,  no,         teos10, -1.358E-4,  -2.129E-11, Initial T (in-situ) and S (prac) from WOA (aut) and Q=75W and no sponges, #cf mrb017
+mrb_019**,  Albedo,     12.02.2025, 20,     variable,   100x100,    3,  no,         teos10, -1.358E-4,  -2.129E-11, Initial T (in-situ) and S (abs) from WOA (aut) and Q=75W and no sponges, #cf mrb018
+mrb_020,    Albedo,     12.02.2025, 20,     variable,   100x100,    3,  no,         teos10, -1.358E-4,  -2.129E-11, Initial T (in-situ) and S (abs) from WOA (aut) and Q=75W and no sponges and no saltStepping=F, #cf mrb019
+mrb_021**,  Albedo,     12.02.2025, 20,     variable,   100x100,    3,  no,         lin,    -1.358E-4,  -2.129E-11, Initial T (in-situ) and S (abs) from WOA (aut) and Q=75W and no sponges and no saltStepping=F *accid. used SA*, #cf mrb020
+mrb_022,    Albedo,     14.02.2025, 20,     variable,   100x100,    3,  no,         teos10, -1.358E-4,  -2.129E-11, Initial T (in-situ) and S (abs) from WOA (aut) and Q=825W and no sponges and no saltStepping=F,
+mrb_023**,  Albedo,     14.02.2025, 20,     variable,   100x100,    3,  no,         teos10, -1.358E-4,  -2.129E-11, Initial T (in-situ) and S (pract) from WOA (aut) and Q=825W and no sponges and no saltStepping=F,
+mrb_024,    Albedo,     18.02.2025, 20,     variable,   100x100,    3,  no,         lin,    -1.358E-4,  -2.129E-11, Initial T (in-situ) and S (pract) from WOA (aut) and Q=75W and no sponges and no saltStepping=F,
+mrb_025**,  Albedo,     24.02.2025, 20,     variable,   100x100,    3,  no,         teos10, -1.358E-4,  -2.129E-11, Initial T (in-situ) from WOA and const. S (34.8) and Q=150W and no sponges and no saltStepping=F,	
+mrb_026**,  Albedo,     24.02.2025, 20,     variable,   100x100,    3,  no,         teos10, -1.358E-4,  -2.129E-11, Initial T (in-situ) from WOA and const. S (34.8) and periodic Q=150W and no sponges and no saltStepping=F, 
+mrb_027**,  Albedo,     25.02.2025, 20,     variable,   100x100,    3,  no,         teos10, -1.358E-4,  -2.129E-11, Initial T (in-situ) and S (pract; 0.5 x deviation) from WOA (aut) signal and periodic Q=150W and no sponges and no saltStepping=F,
+mrb_028,    Albedo,     26.02.2025, 20,     variable,   100x100,    3,  no,         teos10, -1.358E-4,  -2.129E-11, Initial T (theta) and S (abs; 0.9 x deviation) from WOA and Q=150W and no sponges and no saltStepping=F,
+mrb_029,    Albedo,     28.02.2025, 20,     variable,   100x100,    3,  no,         teos10, -1.358E-4,  -2.129E-11, Initial T (theta) and S (abs) from mooring (simplified) and Q=2500W and no sponges and no saltStepping=F and g=9.81,
+mrb_030,    Albedo,     02.03.2025, 20,     variable,   100x100,    3,  no,         teos10, -1.358E-4,  -2.129E-11, Initial T (theta) and S (abs) from mooring (simplified) and Q=10000W and no sponges and no saltStepping=F and g=9.81,
+mrb_031**,  Albedo,     03.03.2025, 20,     variable,   100x100,    3,  tau=86400,  teos10, -1.358E-4,  -2.129E-11, Initial T (theta) and S (abs) from mooring (simplified) and Q=0W and side+bottom sponges 5 cells deep and no saltStepping=F and g=9.81,
+mrb_032**,  Albedo,     03.03.2025, 20,     variable,   150x150,    3,  tau=86400,  teos10, -1.358E-4,  -2.129E-11, Initial T (theta) and S (abs) from mooring (simplified) and Q=2500W and side+bottom sponges 5 cells deep and no saltStepping=F and g=9.81,
+mrb_033***, Albedo,     04.03.2025, 20,  var (500 m),   150x150,    3,  tau=86400,  teos10, -1.358E-4,  -2.129E-11, Initial T (theta) and S (abs) from mooring (woa above and below) and periodic Q=2500W and side+bottom sponges 5 cells deep and no saltStepping=F and g=9.81,
+mrb_034***, Albedo,     06.03.2025, 20,  var (500 m),   150x150,    3,  tau=86400,  teos10, -1.358E-4,  -2.129E-11, Initial T (theta) and S (abs) from mooring (woa above and below) and Q=2500W and side+bottom sponges 5 cells deep and no saltStepping=F and g=9.81,
+mrb_035**,  Albedo,     12.03.2025, 20,  var (500 m),   150x150,    3,  tau=86400,  teos10, -1.358E-4,   8.194E-12, Initial T (theta) and S (abs) from mooring (woa above and below) and Q=2500W and side+bottom sponges 5 cells deep and no saltStepping=F and g=9.81,
 
+Planned run(s):
+mrb_036,    Albedo,       .03.2025, 20,  var (500 m),   150x150,    3,  tau=86400,  teos10, -1.358E-4,   8.194E-12, Initial T (theta) and S (abs) from mooring (woa above and below) ... bottom rbcs only? different more defensible periodic surface forcing? random init velocities? at surface only? (*ie more like boshakh's paper*)
 
-mrb_012,        Albedo,         29.01.2025,     20,             variable,       3,      2-layer fluid with no sponges, **accidentally compiled with the rbcs package in CODE,
-mrb_013,        Albedo,         29.01.2025,     20,             variable,       3,      5-side 5-cell sponges with tau=86400 and no surface forcing,
-
-
-
-mrb_014,        Albedo,         29.01.2025,     20,             variable,       3,      Same as 011 but with a bigget domain (150x150) to move the boundaries farther out,
+*   means deleted
+**  means deleted MDS binaries but saved metadata
+*** means moved to the group so-clim directory

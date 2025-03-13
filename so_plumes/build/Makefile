@@ -1,7 +1,7 @@
 # Multithreaded + multi-processing makefile for:
 #    Linux albedo0 4.18.0-372.13.1.el8_6.x86_64 #1 SMP Wed Jun 29 17:21:09 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
 # This makefile was generated automatically on
-#    Wed Jan 29 17:33:40 CET 2025
+#    Wed Mar 12 17:37:37 CET 2025
 # by the command:
 #    ../../tools/genmake2 -mods ../code -mpi -optfile ../../tools/build_options/linux_amd64_ifort_albedo
 # executed by:
@@ -1337,7 +1337,7 @@ BUILD_INFO.h:
 	@echo Creating $@ ...
 	-echo "#define THISVER 'checkpoint69a'" > $@
 	-echo "#define THISUSER 'robrow001'" >> $@
-	-echo "#define THISDATE 'Wed Jan 29 17:33:40 CET 2025'" >> $@
+	-echo "#define THISDATE 'Wed Mar 12 17:37:37 CET 2025'" >> $@
 	-echo "#define THISHOST 'albedo0'" >> $@
 
 # The normal chain of rules is (  .F - .f - .o  )

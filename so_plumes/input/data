@@ -12,20 +12,20 @@
  no_slip_bottom=.FALSE.,
  diffKhT=4.E-2,
  diffKzT=4.E-2,
- f0=1.E-4,
- beta=0.E-11,
+ f0=-1.358E-4,
+ beta=8.1944221E-12,
  tAlpha=2.0E-4,
  sBeta =0.,
- gravity=10.,
+ gravity=9.81,
  rhoConst=1000.,
  rhoNil=1000.,
  heatCapacity_Cp=4000.,
 #rigidLid=.TRUE.,
  implicitFreeSurface=.TRUE.,
 #exactConserv=.TRUE.,
- eosType='LINEAR',
+ eosType='TEOS10',
  nonHydrostatic=.TRUE.,
- saltStepping=.FALSE.,
+#saltStepping=.FALSE.,
  useSingleCpuIO=.TRUE.,
  &
 
@@ -40,7 +40,7 @@
 # Time stepping parameters
  &PARM03
  nIter0=0,
- endTime=86400.,
+ endTime=172800.,
 #nTimeSteps=3,
  deltaT=3.,
  abEps=0.1,
@@ -50,6 +50,9 @@
  monitorFreq=180.,
  monitorSelect=1,
  monitorFreq=1.,
+# periodicExternalForcing=.TRUE.,
+# externForcingPeriod=3600.,
+# externForcingCycle=172800.,
  &
 
 # Gridding parameters
@@ -57,19 +60,19 @@
  usingCartesianGrid=.TRUE.,
  dXspacing=20.,
  dYspacing=20.,
- delZ= 	 0.4, 1.2, 2.0, 2.8, 3.6, 4.4, 5.2, 6.0, 6.8, 7.6, 
-	 8.4, 9.2,10.0,10.8,11.6,12.4,13.2,14.0,14.8,15.6,
-	16.4,17.2,18.0,18.8,19.6,20.4,21.2,22.0,22.8,23.6,
-	24.4,25.2,26.0,26.8,27.6,28.4,29.2,30.0,30.8,31.6,
-	32.4,33.2,34.0,34.8,35.6,36.4,37.2,38.0,38.8,39.6,
+ delZ= 1,  1,  1,  1,  1,  1,  2,  2,  2,  2, 
+       2,  2,  2,  3,  3,  3,  3,  3,  4,  4, 
+	   4,  5,  5,  5,  6,  6,  7,  7,  8,  8, 
+	   9, 10, 10, 11, 12, 13, 14, 15, 16, 17, 
+	  19, 20, 22, 24, 25, 27, 29, 32, 34, 37,
  &
 
 # Input datasets
- &PARM05
- surfQnetFile=   'Qnet_WOA2.150x150.bin',
- hydrogThetaFile=    'T.WOA.150x150.bin',
- hydrogSaltFile=     'S.WOA.150x150.bin',
- pSurfInitFile=   'Eta.flat.150x150.bin',
- uVelInitFile='U.motionless.150x150.bin',
- vVelInitFile='V.motionless.150x150.bin',
+ &PARM05 
+ surfQnetFile=      'Qnet_2500W.40mCirc.150x150.bin',
+ hydrogThetaFile='theta.mooring.50x150x150.500m.bin',
+ hydrogSaltFile=    'SA.mooring.50x150x150.500m.bin',
+ pSurfInitFile=               'Eta.flat.150x150.bin',
+ uVelInitFile=         'U.motionless.50x150x150.bin',
+ vVelInitFile=         'V.motionless.50x150x150.bin',
  &
